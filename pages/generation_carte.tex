@@ -35,7 +35,7 @@
         \centering
         \includegraphics[width=\linewidth]{images/low_frequency.png}
         \caption{Exemple carte et élévation avec une fréquence basse}
-        \label{fig:image_avant_expansion}
+        \label{fig:image_avant_expansion}image
     \end{subfigure}
     \hfill
     \begin{subfigure}{0.4\linewidth}
@@ -44,6 +44,52 @@
         \caption{Exemple carte et élévation avec une haute fréquence}
         \label{fig:histo_avant_expansion}
     \end{subfigure}
-
+    \caption{Comparaison de niveau de fréquences}
 \end{figure}
 
+    \paragraph{Génération de biomes}
+    Sur notre carte nous voulons différents biomes c'est a dire différents environnements repartiimages le plus naturellement possible. Pour cela en plus de la carte de bruit qui va gérer l'élévation du terrain nous allons générer une autre carte de bruit qui va simuler l’humidité du milieux. En combinant ces deux cartes on peut obtenir des biomes plutôt cohérents. En plus de cela nous pouvons définir une élévation minimale qui va permettre de créer des océans.
+
+    Enfin nous avons défini une aire de jeu circulaire au milieu de la carte celle ci sera plate mais utilise quand même les noisemap pour gérer les biomes.
+
+
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=0.5\linewidth]{images/map.png}
+        \caption{Une carte générée avec notre code}
+        \label{fig:enter-label}
+    \end{figure}
+
+    \paragraph{Placer des ressources}
+    Un autre défi de la création de la carte est de placer des ressources sur la carte en favorisant les potentielles interaction entre les royaumes, c'est a dire créer des ressources qui serons rares et ne pas les répartir de manière uniformes pour obliger les royaumes a interagir entre eux. Si on prend simplement des positions aléatoires sur la carte par exemple on se retrouve avec un résultat trop uniforme on aimerait avoir une génération avec des trous et des endroits plus concentrés. La solution que nous avons trouvé pour cela ce sont les "Jittered grid" on peut traduire cela par "grille perturbée". Le principe est de générer une grille carrée ou hexagonales et d'appliquer une perturbation aux points de la grille. Voici le résultat.
+
+\begin{figure}[!h]
+    \centering
+    \begin{subfigure}{0.4\linewidth}
+        \centeringimage
+        \includegraphics[width=\linewidth]{images/grille.png}
+        \caption{Grille avant la perturbation}
+        \label{fig:image_avant_expansion}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.4\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/jitter.png}
+        \caption{Gille après la perturbation}
+        \label{fig:histo_avant_expansion}
+    \end{subfigure}
+    \caption{Visualisation de jittered grid}
+\end{figure}
+
+On voit apparaître des zones avec peu de points et d'autres avec beaucoup de points.
+
+\paragraph{Résultat sur la carte}
+Les triangles violets représentent les positions des ressources.
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{images/mapjitter.png}
+    \caption{Carte avec position de ressources générés}
+    \label{fig:enter-label}
+\end{figure}
+
+Il suffira de re-exécuter ce code le même nombre de fois que de ressources.
