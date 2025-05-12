@@ -11,6 +11,9 @@
 \usepackage[overload]{abraces} % allows \aoverbrace
 \usepackage{float}
 \usepackage{tcolorbox}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{subcaption} % Pour gérer les sous-figures
+
 
 \usepackage{xcolor} % colour customisation, extends to tables with {colortbl}
 \definecolor{astral}{RGB}{46,116,181}
@@ -21,6 +24,22 @@
 \definecolor{matrix-mist}{RGB}{204,204,204} % remark colour
 \definecolor{numeric-navy}{RGB}{204,204,204} % theorem colour 
 \definecolor{quadratic-quartz}{RGB}{204,153,153} % example colour 
+
+\usepackage[utf8]{inputenc}  % LaTeX, comprends les accents !
+\usepackage[T1]{fontenc}  % Police contenant les caractères français
+\usepackage[french]{babel}  % Le document est en français
+\usepackage{fullpage}  % pour les marges
+\usepackage{lmodern}  % font type
+\usepackage{datetime}  % pour la date
+\newdate{frontpagedate}{12}{05}{2024}  % jour, mois, année
+\usepackage[shortlabels]{enumitem}  % pour les listes numérotées
+\setlist[itemize,1]{label={\color{gray}\small \textbullet}} % customises itemize default -
+\usepackage{xcolor} % colour customisation, extends to tables with {colortbl}
+\usepackage{url}  % pour les url
+\usepackage[breaklinks]{hyperref} % pour casser les liens hypertextes
+\usepackage{breakurl} % pour casser les liens hypertextes
+\usepackage{amsmath} % pour les formules mathématiques
+
 
 
 \usepackage{float}

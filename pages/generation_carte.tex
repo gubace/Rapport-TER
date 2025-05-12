@@ -1,0 +1,49 @@
+
+
+\subsection{Génération de la carte}
+    Pour ce projet nous voulions créer un outil pour créer une carte procéduralement. Pour cela nous avons écrit un programme en C++ qui crée un fichier .OBJ a partir de cartes de bruits.
+    \paragraph{Cartes de bruits}
+    Une carte de bruit, ou "noisemap", dans le contexte de la génération procédurale, est une technique utilisée pour créer des textures, des terrains ou des environnements de manière algorithmique. Les noisemaps dans la génération procédurale sont utilisées pour introduire des variations naturelles et réalistes dans les modèles générés par ordinateur.
+    
+    La génération d'une noisemap implique l'utilisation de fonctions de bruit, telles que le bruit de Perlin, le bruit de Simplex ou d'autres algorithmes de bruit procédural. Ces fonctions génèrent des valeurs pseudo-aléatoires qui varient de manière continue et douce à travers l'espace. L'utilisation la plus elementaire de ce genre de cartes et de lier l'élévation du terrain aux valeurs de la carte de bruit.
+
+    \begin{figure}[!h]
+        \centering
+            \includegraphics[width=0.5\linewidth]{images/render-noise.png}
+            \caption{Visualisation de Carte de bruit}
+            \label{fig:enter-label}
+    \end{figure}
+
+    Nous pouvons manipuler l'aléatoire des fonctions qui generent ce genre de carte grace a differents parametres:
+    \begin{itemize}
+        \item La fréquence dans le contexte des fonctions de bruit, comme le bruit de Perlin, détermine la granularité ou la finesse des détails dans la carte de bruit générée. Une fréquence élevée signifie que les variations de bruit se produisent plus rapidement, ce qui entraîne des détails plus fins et plus nombreux dans la carte. À l'inverse, une fréquence basse produit des variations plus lentes et plus douces, résultant en des caractéristiques plus larges et moins détaillées.
+        \item Les octaves sont utilisées pour ajouter de la complexité et du réalisme aux cartes de bruit. Chaque octave est une couche supplémentaire de bruit générée à une fréquence différente. En superposant plusieurs octaves, on peut créer des textures plus riches et plus variées. Les octaves sont généralement ajoutées avec des fréquences de plus en plus élevées et des amplitudes de plus en plus faibles.
+    \end{itemize}
+
+    \paragraph{Effet sur la Carte Générée}
+    \begin{itemize}
+        \item \textit{Fréquence Basse} : Une fréquence basse produit des caractéristiques larges et douces. Par exemple, dans la génération de terrains, une fréquence basse peut créer des collines et des vallées larges et douces.
+        \item \textit{Fréquence Élevée} : Une fréquence élevée produit des détails fins et nombreux. Par exemple, dans la génération de terrains, une fréquence élevée peut ajouter des rochers, des crevasses et d'autres détails fins à la surface.
+        \item \textit{Octaves Multiples} : L'utilisation de plusieurs octaves permet de combiner des caractéristiques larges et douces avec des détails fins. Par exemple, une première octave avec une fréquence basse peut créer les grandes formes du terrain, tandis que des octaves supplémentaires avec des fréquences plus élevées ajoutent des détails fins comme des rochers et des textures de surface.
+    \end{itemize}
+    \newpage
+    Voici des exemples en images de la différence.
+
+    \begin{figure}[!h]
+    \centering
+    \begin{subfigure}{0.4\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/low_frequency.png}
+        \caption{Exemple carte et élévation avec une fréquence basse}
+        \label{fig:image_avant_expansion}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.4\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/hight_frequency.png}
+        \caption{Exemple carte et élévation avec une haute fréquence}
+        \label{fig:histo_avant_expansion}
+    \end{subfigure}
+
+\end{figure}
+
