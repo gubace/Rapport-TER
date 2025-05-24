@@ -1,40 +1,41 @@
 \section{Introduction}
-        L'objectif de ce projet est de réaliser un jeu vidéo massivement multijoueur sur navigateur. Celui ci se joue de deux façons bien distinctes :
-        \begin{itemize}
-            \item \textit{Mode "Péon"} : Le joueur contrôle un personnage et s'occupe des actions élémentaires telles que récupérer des ressources, construire des bâtiments, etc.. Ces cations seronts fait a traves des mini-jeux simples.
-            \item \textit{Mode "Seigneur"} : Le joueur ne contrôle pas de personnage directement, mais a une vision plus globale et donne des ordres aux péons en fonction des besoins du royaume.
-        \end{itemize}
-        Il y aurait plusieurs royaumes gérés par des seigneurs différents, en concurrence pour devenir le royaume le plus puissant. L'idée est inspirée de la "pixel war", l'événement temporaire sur r/place de Reddit où tous les utilisateurs du site pouvaient dessiner sur une page blanche. Ce principe très simple avait créé des dynamiques de groupes autour de communautés d'Internet et de streamers notamment qui voulaient leur place sur ce tableau géant, et nous avions assisté à des guerres d'alliances et des trahisons. Là où le but de la pixel war était purement esthétique, notre jeu serait plus concurrentiel. L'objectif de notre projet est de recréer ces dynamiques de groupes dans les royaumes.
+
+L'objectif de ce projet est de réaliser un jeu vidéo massivement multijoueur jouable directement depuis un navigateur web. Ce jeu propose deux modes de jeu bien distincts, offrant aux joueurs des expériences complémentaires :
+
+\begin{itemize}
+    \item \textit{Mode "Péon"} : le joueur incarne un personnage individuel et s’occupe d’actions élémentaires comme la collecte de ressources, la construction de bâtiments, ou d'autres tâches concrètes. Ces actions sont réalisées à travers des mini-jeux simples et interactifs.
+    \item \textit{Mode "Seigneur"} : le joueur ne contrôle pas directement un personnage, mais adopte une vue stratégique à l’échelle d’un royaume. Il donne des ordres aux péons en fonction des priorités et des besoins du territoire qu’il gouverne.
+\end{itemize}
+
+L’univers de jeu est composé de plusieurs royaumes, chacun dirigé par un seigneur différent. Ces royaumes sont en concurrence pour devenir la puissance dominante. Ce système s'inspire librement de la célèbre "Pixel War", un événement sur la plateforme Reddit (r/Place), où des milliers d'utilisateurs ont collaboré ou se sont affrontés pour s’approprier des espaces d’un immense canevas numérique. Bien que purement esthétique, cet événement a généré de véritables dynamiques sociales, entre alliances communautaires et rivalités de territoires. Notre ambition est de transposer ces dynamiques sociales dans un jeu structuré et compétitif, en donnant du sens aux interactions et aux conflits entre joueurs.
 
 
-        \\
 
-        \textcolor{orange}{// Image Pixelwar (commentée) ca prend du temps a compiler}
+\begin{figure}[!h]
+   \centering
+    \includegraphics[width=0.5\linewidth]{images/pixelwar.png}
+    \caption{Image finale de r/Place}
+    \label{fig:pixelwar}
+\end{figure}
 
-        \\
+\paragraph{Étapes et collaboration}
+Ce projet, bien que complet en soi, est réalisé en collaboration avec un autre groupe de TER ayant développé un backend scalable destiné à supporter des applications en ligne à fort trafic. Cette coopération nous permet de nous concentrer sur le développement du frontend, tout en assurant une infrastructure serveur solide et adaptée à un jeu massivement multijoueur.
 
-        %image pixelwar (long a charger)
-        %\begin{figure}[!h]
-        %   \centering
-        %    \includegraphics[width=0.5\linewidth]{images/pixelwar.png}
-        %    \caption{Image finale de r/Place}
-        %    \label{fig:enter-label}
-        %\end{figure}
+\paragraph{Défis identifiés}
+Avant même de commencer le développement, nous avons identifié plusieurs défis techniques et conceptuels majeurs :
+\begin{itemize}
+    \item Générer une carte procédurale intégrant différentes ressources.
+    \item Choisir une technologie adaptée au développement web interactif (WebGL, WebSockets, etc.).
+    \item Concevoir un moteur de jeu simple et modulaire.
+    \item Développer une interface utilisateur intuitive et réactive.
+    \item Créer des mini-jeux simples mais engageants pour les actions de type Péon.
+    \item Équilibrer les deux modes de jeu (Péon / Seigneur) pour garantir une jouabilité équitable et cohérente.
+    \item Assurer une communication fluide et sécurisée entre frontend et backend.
+    \item Créer ou intégrer des assets graphiques adaptés à l’univers du jeu.
+\end{itemize}
 
-        Ce projet peut se suffire a lui même mais il est fait en collaboration avec un autre groupe de TER qui a crée un Backend scallable pour accueillir des applications comme la notre. Nous allons donc lier nos projets pour déployer notre frontend sur leur backend.
+\paragraph{Portée du projet (MVP)}
+Ce projet est ambitieux, et il serait irréaliste de livrer une version complète, stable et publiable dans le temps imparti. C’est pourquoi notre objectif est de développer un \textit{prototype fonctionnel} (MVP – Minimum Viable Product). Ce MVP se concentrera sur l’essentiel : la mise en œuvre des deux modes de jeu, l’interaction avec une carte interactive, et la connexion avec le backend pour la gestion en temps réel des actions des joueurs. Il servira de base pour valider les choix techniques, les mécaniques de gameplay, et les dynamiques collectives que nous souhaitons créer. Ce projet sera continué a la suite de ce rendu dans le but de réelement le lancer en ligne.
 
-
-        Les défis que nous avons identifiés avant le debut du developement sont les suivants:
-        \begin{itemize}
-            \item Générer une carte procéduralement avec ressources.
-            \item Choisir la bonne technologie pour faire tourner le projet sur un navigateur.
-            \item Créer un moteur de jeu simple.
-            \item Comment créer une interface utilisateur.
-            \item Créer les minijeux.
-            \item Créer et équilibrer les 2 façons de jouer différents.
-            \item Gérer la communication avec le Backend.
-            \item Créer (ou trouver) des assets.
-        \end{itemize}
-
-
-        \textcolor{red}{trouver une problématique}
+\paragraph{Problématique}
+\textit{Comment concevoir un prototype fonctionnel de jeu massivement multijoueur sur navigateur qui permette de valider les dynamiques de coopération et de stratégie entre joueurs, tout en intégrant de manière cohérente et interactive deux modes de jeu complémentaires (Péon et Seigneur) ?}

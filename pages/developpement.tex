@@ -1,0 +1,28 @@
+\section{développement}
+
+
+\paragraph{Choix de développement}
+
+\begin{itemize}
+    \item Le développement de notre projet repose sur l’articulation de deux composants logiciels bien distincts, chacun répondant à des besoins spécifiques et complémentaires. D’une part, nous avons conçu un outil de génération de terrain procédural développé en \textbf{C++}. Ce programme est chargé de produire automatiquement des cartes de jeu structurées, de taille paramétrable, intégrant différents \textit{biomes} (zones géographiques thématiques telles que forêt, montagne, désert, etc.) ainsi qu’un positionnement intelligent et configurable des ressources (comme le bois, la pierre ou l’or).
+    \\
+    \item Cet outil de génération doit également produire des données dans un format structuré et exploitable par le second programme du projet : un \textbf{moteur de jeu} léger, développé en \textbf{TypeScript} et reposant sur la bibliothèque \textbf{Three.js}, capable de tourner directement dans un navigateur web. Ce moteur assure l’affichage de la carte, la gestion de l’interaction utilisateur (notamment en mode Péon), et l'intégration des mécanismes de jeu à travers une interface en ligne fluide et réactive.
+    \\
+    \item Le choix de cette architecture repose à la fois sur des considérations techniques (performance, portabilité, modularité) et sur des contraintes pédagogiques liées à notre formation. Le développement de la génération procédurale en C++ nous permet de capitaliser sur notre expérience en programmation c++, tandis que le moteur de jeu web représente un défi plus orienté front-end, mobilisant des compétences en visualisation 3D interactive dans un contexte que nous maîtrisions peu au départ. Il s'agit donc également d'une opportunité d’apprentissage significative, puisque nous avons dû nous approprier rapidement des outils comme Three.js ou encore les principes de développement web modernes, dans un cadre concret et motivant.
+    \\
+    \item Le choix de TypeScript plutôt que JavaScript pur s’explique par notre volonté de bénéficier d’une meilleure robustesse dans le code, grâce au typage statique et à une meilleure maintenabilité à mesure que le projet grandit. Cette décision s’inscrit dans une logique de professionnalisation du développement et d’anticipation des besoins futurs en matière d’évolutivité.
+    \\
+    \item La communication entre les deux programmes (générateur C++ et moteur TypeScript) repose sur une série de fichiers intermédiaires, permettant une séparation claire des responsabilités tout en assurant une interopérabilité efficace.
+    Ainsi, notre projet s’organise autour d’un pipeline de production modulaire : génération des données brutes d’un côté, exploitation visuelle et interactive de l’autre.
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+

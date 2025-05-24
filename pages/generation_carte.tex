@@ -93,3 +93,35 @@ Les triangles violets représentent les positions des ressources.
 \end{figure}
 
 Il suffira de re-exécuter ce code le même nombre de fois que de ressources. Les emplacements des ressources sont enregistrés dans un fichier csv qui pourra être lu par le moteur de jeu.
+
+
+\paragraph{Importation sur le moteur}
+Une fois la carte générée grâce a cet outil développé en C++ il faut l'importer sur notre moteur fait maison en TypeScript (Nous en parlons en détail dans la prochaine section). Pour cela nous avons l'option d'enregistrer la carte générée au format OBJ pour la géométrie, on peut récupérer également la texture des couleurs.
+Pour les ressources l'objectif étant qu'elles puissent être chargés par le serveur et pas directement par le frontend. Pour cela les coordonnées de la ressource sont simplement enregistrés sur un fichier csv qui n'enregistre que ses coordonnées en 2D (x et y) et son type:
+
+ \begin{center}
+         \begin{verbatim}
+                            tree,1.61432,2.03902
+                            tree,1.60876,2.0844
+                            tree,1.61334,2.12896
+                            tree,1.61054,2.16839
+                            tree,1.60979,2.48438
+                            tree,1.61826,2.48242
+                            rock,2.46094,1.875
+                            rock,2.5,-1.44531
+                            rock,2.5,-1.25
+                            rock,2.5,1.32812
+                            gold,-2.46094,-1.48438
+                            gold,-2.46094,-1.21094
+                            gold,-2.30469,1.83594
+         \end{verbatim}
+ \end{center}
+
+Pour le moment nous allons charger et rendre les ressources directement dans le frontend chose qui sera changé a terme.
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.4\linewidth]{images/generation_on_engine.png}
+    \caption{La carte et les ressources sur le moteur maison}
+    \label{fig:enter-label}
+\end{figure}
