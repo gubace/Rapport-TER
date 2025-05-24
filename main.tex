@@ -1,20 +1,25 @@
 \documentclass[french,a4paper,10pt]{article}
 \input{./header.tex}
 \usepackage[a4paper,hmargin=30mm,vmargin=30mm]{geometry}
+
+
 \title{\color{astral} \sffamily \bfseries Rapport TER}
 \author{Zink Tom - Saperès Clément - Nigh Kai - Bonetti Timothée}
-\date{april 2025}
+\date{may 2025}
 
 \begin{document}
 
 \maketitle
 
 \hypersetup{
-    hidelinks           % Supprime le cadre autour des liens
+    linkcolor=black
 }
 
 \tableofcontents
 
+\hypersetup{
+    linkcolor=blue
+}
 
 \newpage
 
@@ -36,6 +41,8 @@
     
     \include{pages/engine}
 
+    \include{pages/camera}
+
     \include{pages/interface}
 
     \include{pages/assets}
@@ -47,6 +54,8 @@
     \subsection{communication avec le backend}
 
 \section{Conclusion}
+
+
 
 
 \end{document}

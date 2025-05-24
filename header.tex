@@ -14,9 +14,11 @@
 \usepackage{graphicx} % Required for inserting images
 \usepackage{subcaption} % Pour gérer les sous-figures
 
+
+
 \usepackage[backref=true]{biblatex}
 
-\usepackage{xcolor} % colour customisation, extends to tables with {colortbl}
+%\usepackage{xcolor} % colour customisation, extends to tables with {colortbl}
 \definecolor{astral}{RGB}{46,116,181}
 \definecolor{verdant}{RGB}{96,172,128}
 \definecolor{algebraic-amber}{RGB}{255,179,102} % definition colour
@@ -35,10 +37,10 @@
 \newdate{frontpagedate}{12}{05}{2024}  % jour, mois, année
 \usepackage[shortlabels]{enumitem}  % pour les listes numérotées
 \setlist[itemize,1]{label={\color{gray}\small \textbullet}} % customises itemize default -
-\usepackage{xcolor} % colour customisation, extends to tables with {colortbl}
+%\usepackage{xcolor} % colour customisation, extends to tables with {colortbl}
 \usepackage{url}  % pour les url
-\usepackage[breaklinks]{hyperref} % pour casser les liens hypertextes
-\usepackage{breakurl} % pour casser les liens hypertextes
+%\usepackage[breaklinks]{hyperref} % pour casser les liens hypertextes
+%\usepackage{breakurl} % pour casser les liens hypertextes
 \usepackage{amsmath} % pour les formules mathématiques
 
 
@@ -55,7 +57,9 @@
 \usepackage{mathrsfs}
 \usepackage{MnSymbol}
 \usepackage{etoolbox}% http://ctan.org/pkg/etoolbox
-\usepackage{hyperref}
+
+\usepackage[table,xcdraw,svgnames]{xcolor}
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue, pdfborder={0 0 0}]{hyperref}
 
 \usepackage{tikz}
 \usepackage{pgfplots}
