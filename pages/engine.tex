@@ -85,7 +85,7 @@ Pour faire notre choix parmi toutes ces possibilités (et davantage encore!), no
 
     Ces modules fonctionnent ensemble pour fournir une base solide à la création du jeu. Expliquons chacun d'eux en détails.
 \paragraph{ECS}
-    Notre implémentation de l'architecture ECS est basée sur \href{https://maxwellforbes.com/posts/typescript-ecs-implementation/}{\textit{cet article de 2021 écrit par Maxwell Forbes}}. Les entités sont simplement représentées par un entier. La classe \textit{ECS} lie ces identifiants à un ensemble d'objets héritant de \textit{Component}. La classe \textit{ECS} contient aussi l'ensemble des systèmes.
+    Notre implémentation de l'architecture ECS est basée sur \href{https://maxwellforbes.com/posts/typescript-ecs-implementation/}{\textit{cet article de 2021 écrit par Maxwell Forbes}} \cite{forbes2021}. Les entités sont simplement représentées par un entier. La classe \textit{ECS} lie ces identifiants à un ensemble d'objets héritant de \textit{Component}. La classe \textit{ECS} contient aussi l'ensemble des systèmes.
     
     Quand un système, une entité ou un composant est ajouté(e) ou enlevé(e) l'ECS, la liste des entités concernées par chaque système est mise à jour.
     Une fonction permet d'appliquer le traitement de chaque système aux entités concernées. Voici un exemple-jouet d'utilisation de notre système ECS pour faire rebondir des objets sur le sol.

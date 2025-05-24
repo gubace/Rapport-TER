@@ -3,9 +3,9 @@
 \subsection{Génération de la carte}
     Pour ce projet nous voulions créer un outil pour créer une carte procéduralement. Pour cela nous avons écrit un programme en C++ qui crée un fichier .OBJ a partir de cartes de bruits.
     \paragraph{Cartes de bruits}
-    Une carte de bruit, ou "noisemap", dans le contexte de la génération procédurale, est une technique utilisée pour créer des textures, des terrains ou des environnements de manière algorithmique. Les noisemaps dans la génération procédurale sont utilisées pour introduire des variations naturelles et réalistes dans les modèles générés par ordinateur.
+    Une carte de bruit, ou "noisemap", dans le contexte de la génération procédurale, est une technique utilisée pour créer des textures, des terrains ou des environnements de manière algorithmique. Les noisemaps dans la génération procédurale sont utilisées pour introduire des variations naturelles et réalistes dans les modèles générés par ordinateur.\cite{CreateTerrain}
     
-    La génération d'une noisemap implique l'utilisation de fonctions de bruit, telles que le bruit de Perlin, le bruit de Simplex ou d'autres algorithmes de bruit procédural. Ces fonctions génèrent des valeurs pseudo-aléatoires qui varient de manière continue et douce à travers l'espace. L'utilisation la plus elementaire de ce genre de cartes et de lier l'élévation du terrain aux valeurs de la carte de bruit.
+    La génération d'une noisemap implique l'utilisation de fonctions de bruit, telles que le bruit de Perlin, le bruit de Simplex ou d'autres algorithmes de bruit procédural. Ces fonctions génèrent des valeurs pseudo-aléatoires qui varient de manière continue et douce à travers l'espace. L'utilisation la plus élémentaire de ce genre de cartes et de lier l'élévation du terrain aux valeurs de la carte de bruit.
 
     \begin{figure}[!h]
         \centering
@@ -14,7 +14,7 @@
             \label{fig:enter-label}
     \end{figure}
 
-    Nous pouvons manipuler l'aléatoire des fonctions qui generent ce genre de carte grace a differents parametres:
+    Nous pouvons manipuler l'aléatoire des fonctions qui génèrent ce genre de carte grâce a différents paramètres:
     \begin{itemize}
         \item La fréquence dans le contexte des fonctions de bruit, comme le bruit de Perlin, détermine la granularité ou la finesse des détails dans la carte de bruit générée. Une fréquence élevée signifie que les variations de bruit se produisent plus rapidement, ce qui entraîne des détails plus fins et plus nombreux dans la carte. À l'inverse, une fréquence basse produit des variations plus lentes et plus douces, résultant en des caractéristiques plus larges et moins détaillées.
         \item Les octaves sont utilisées pour ajouter de la complexité et du réalisme aux cartes de bruit. Chaque octave est une couche supplémentaire de bruit générée à une fréquence différente. En superposant plusieurs octaves, on peut créer des textures plus riches et plus variées. Les octaves sont généralement ajoutées avec des fréquences de plus en plus élevées et des amplitudes de plus en plus faibles.
@@ -48,7 +48,7 @@
 \end{figure}
 
     \paragraph{Génération de biomes}
-    Sur notre carte nous voulons différents biomes c'est a dire différents environnements repartiimages le plus naturellement possible. Pour cela en plus de la carte de bruit qui va gérer l'élévation du terrain nous allons générer une autre carte de bruit qui va simuler l’humidité du milieux. En combinant ces deux cartes on peut obtenir des biomes plutôt cohérents. En plus de cela nous pouvons définir une élévation minimale qui va permettre de créer des océans.
+    Sur notre carte nous voulons différents biomes c'est a dire différents environnements répartis le plus naturellement possible. Pour cela en plus de la carte de bruit qui va gérer l'élévation du terrain nous allons générer une autre carte de bruit qui va simuler l’humidité du milieux. En combinant ces deux cartes on peut obtenir des biomes plutôt cohérents. En plus de cela nous pouvons définir une élévation minimale qui va permettre de créer des océans.
 
     Enfin nous avons défini une aire de jeu circulaire au milieu de la carte celle ci sera plate mais utilise quand même les noisemap pour gérer les biomes.
 
@@ -61,7 +61,7 @@
     \end{figure}
 
     \paragraph{Placer des ressources}
-    Un autre défi de la création de la carte est de placer des ressources sur la carte en favorisant les potentielles interaction entre les royaumes, c'est a dire créer des ressources qui serons rares et ne pas les répartir de manière uniformes pour obliger les royaumes a interagir entre eux. Si on prend simplement des positions aléatoires sur la carte par exemple on se retrouve avec un résultat trop uniforme on aimerait avoir une génération avec des trous et des endroits plus concentrés. La solution que nous avons trouvé pour cela ce sont les "Jittered grid" on peut traduire cela par "grille perturbée". Le principe est de générer une grille carrée ou hexagonales et d'appliquer une perturbation aux points de la grille. Voici le résultat.
+    Un autre défi de la création de la carte est de placer des ressources sur la carte en favorisant les potentielles interaction entre les royaumes, c'est a dire créer des ressources qui serons rares et ne pas les répartir de manière uniformes pour obliger les royaumes a interagir entre eux. Si on prend simplement des positions aléatoires sur la carte par exemple on se retrouve avec un résultat trop uniforme on aimerait avoir une génération avec des trous et des endroits plus concentrés. La solution que nous avons trouvé pour cela ce sont les "Jittered grid"\cite{JitteredGrid} on peut traduire cela par "grille perturbée". Le principe est de générer une grille carrée ou hexagonales et d'appliquer une perturbation aux points de la grille. Voici le résultat.
 
 \begin{figure}[!h]
     \centering
