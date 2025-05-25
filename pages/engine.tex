@@ -1,6 +1,6 @@
 \subsection{Moteur de jeu}
 
-\paragraph{Technologies}
+\subsubsection{Technologies}
     L'objectif étant de créer un jeu  par navigateur, nous avons dû choisir entre trois approches distinctes :
     \begin{itemize}
         \item \textbf{Moteur de jeu existant et export HTML5} \newline Avec cette méthode, nous utilisons un moteur de jeu (par exemple, Godot ou Unity) pour développer le jeu puis l'exporter en HTML5. Cependant, cela nous donne moins de contrôle sur les performances et les capacités de notre jeu.
@@ -10,7 +10,14 @@
 
     Comme nous sommes des élèves d'Imagine, nous avons décidé de partir sur la deuxième option. C'est celle qui nous permet le mieux de mettre en action et d'améliorer nos compétences. De plus, cela nous donne l'occasion d'apprendre le développement web orienté 3D et applications interactives.
     
-\paragraph{Le design d'un moteur de jeu}
+\subsubsection{Le design d'un moteur de jeu}
+
+    Un moteur de jeu est un logiciel intermédiaire (\textit{middleware}) permettant de faciliter la création de jeux vidéos. Il regroupe généralement un ensemble de fonctionnalités (visuel, physique, son, etc). Certains moteurs de jeux sont généraliste (faits pour tous les types de jeux), d'autres sont spécialisés pour certains types de jeux, voire développés pour un unique jeu ou une unique série de jeu.
+
+    Un moteur possède presque toujours une boucle de rafraîchissement (\textit{update loop}). Chaque exécution de cette boucle fait avancer dans le temps l'état du jeu, et effectue le rendu graphique du jeu dans ce nouvel état. On préfère habituellement avoir une fréquence de rafraîchissement d'au moins 60 images par secondes pour les applications interactives, alors que 24 IPS ou 29.8 IPS sont souvent suffisants pour des séquences non interactives.
+
+    Notre objectif étant de créer un jeu, notre moteur peut être très spécialisé et orienté vers le jeu que nous voulons créer. Cependant, nous allons voir qu'il y a énormément de manières différentes de structurer un jeu vidéo. D'autre part, en développant un moteur, il convient de garder à l'esprit qu'il sera utilisé pour créer des (dans notre cas, un) jeux. Il faut prêter une attention toute particulière à la clarté et à la facilité de compréhension et d'utilisation du code que l'on crée, car la vitesse de développement et la qualité des jeux créés avec le moteur en dépend directement.
+
     La manière classique de structurer un jeu vidéo (ainsi que la majorité des applications 3D interactives) est par l'usage d'un concept d'\textbf{entité de jeu}. Classiquement, une entité a une existence dans le monde du jeu, par exemple, une montagne, un personnage, une zone qui détecte d'autres entité, etc.
     
     Les entités sont souvent organisées de manière hiérarchique dans une structure arborescente appelée \textbf{Graphe de scène}. Une entité qui est enfante d'une autre hérite généralement de sa transformation 3D : en d'autres termes, les mouvements de l'entité parente sont répercutés sur l'entité enfante ( un chevalier qui court entraîne aussi l'épée qu'il tient en main). D'autre part, ces entités sont spécialisées selon leur utilité : une porte, un zombie ou une explosion nécessitent un traitement différent de la part du développeur.
@@ -50,20 +57,20 @@ Pour faire notre choix parmi toutes ces possibilités (et davantage encore!), no
     L'architecture Entité-Composant-Système (souvent abrégé ECS) est une architecture permettant de décrire des entités en séparant totalement les données des traitements. Comme son nom l'indique, l'ECS est basé sur trois concepts clés :
 
 \begin{itemize}
-    \item \textbf{Les entités} (dans le jargon ECS) représentent exactement ce que l'on a appelé jusqu'ici "entité" : \textit{quelque chose} qui est dans le monde du jeu. Par elles mêmes, elles ne contiennent ni logique ni donnée, mais elle sont chacune associées à un ensemble de composants.
+    \item \textbf{Les entités} (dans le jargon ECS) représentent exactement ce que l'on a appelé jusqu'ici "entité" : \textit{quelque chose} qui est dans le monde du jeu. Par elles mêmes, elles ne contiennent ni logique ni donnée, mais elles sont chacune associées à un ensemble de composants.
     \item \textbf{Les composants} sont des conteneurs de données typés. Leur type indique la fonction de leurs données. Par exemple, un composant 'Rendu' pourra contenir un maillage 3D et un composant 'Transformation', une matrice de $M_4(\mathbb R)$. Les composants ne contiennent aucune logique, mais c'est les systèmes qui vont exploiter leurs données.
     \item \textbf{Les systèmes} sont des fonctions qui agissent sur les entités de manière régulière ou ponctuelle. Chaque système n'agit que sur un sous-ensemble des entités qui possèdent les composants nécessaire à l'application du système. Par exemple, un système "Affichage3D" pourrait agir sur toutes les entités ayant au moins les composants "Rendu" et "Transformation".
 \end{itemize}
 
     \begin{figure}[!h]
         \centering
-        \includegraphics[width=0.5\linewidth]{images/ecsDiagram.PNG}
+        \includegraphics[width=0.8\linewidth]{images/ecsDiagram.PNG}
         \caption{Diagramme produit par Intel illustrant une architecture ECS}
         \label{fig:enter-label}
     \end{figure}
 
     Les avantages de l'ECS sont aussi nombreux que ses problèmes. La centralisation des traitements permet de gagner en performance lorsque le nombre d'entités est bien plus grand que le nombre de systèmes (donc que chaque système agit sur beaucoup d'entités en moyenne). En outre, la concentration des données dans les composants permet une approche \textit{data-driven}
-        \footnote{"régie par les données". Paradigme de programmation où les données sont spécifiées en amont des traitements. Le langage de transformation XML \href{http://www.overleaf.com}{XSLT} en est un exemple.}
+        \footnote{"régie par les données". Paradigme de programmation où les données sont spécifiées en amont des traitements.\href{https://en.wikipedia.org/wiki/XSLT}{XSLT} le langage de transformation du XML en est un exemple.}. 
     D'un autre côté, pour des cas d'utilisation avec peu d'entités et beaucoup de variance dans la logique de traitement, l'ECS est peu souhaitable car il est moins intuitif à utiliser que la plupart des alternatives, et les gains de performance sont moindres voir négatifs.
 
     Nous utilisons une architecture ECS car ses forces coïncident avec notre cas d'utilisation : Traitement de beaucoup d'entités avec un nombre de traitement relativement restreint, et spécialisation d'un grand nombre d'entités par une approche orientée-données.
@@ -84,29 +91,174 @@ Pour faire notre choix parmi toutes ces possibilités (et davantage encore!), no
 \end{itemize} 
 
     Ces modules fonctionnent ensemble pour fournir une base solide à la création du jeu. Expliquons chacun d'eux en détails.
-\paragraph{ECS}
-    Notre implémentation de l'architecture ECS est basée sur \href{https://maxwellforbes.com/posts/typescript-ecs-implementation/}{\textit{cet article de 2021 écrit par Maxwell Forbes}} \cite{forbes2021}. Les entités sont simplement représentées par un entier. La classe \textit{ECS} lie ces identifiants à un ensemble d'objets héritant de \textit{Component}. La classe \textit{ECS} contient aussi l'ensemble des systèmes.
+\subsubsection{ECS}
+    Notre implémentation de l'architecture ECS est basée sur \href{https://maxwellforbes.com/posts/typescript-ecs-implementation/}{\textit{cet article de 2021 écrit par Maxwell Forbes}}. Les entités sont simplement représentées par un entier. La classe \textit{ECS} lie ces identifiants à un ensemble d'objets héritant de \textit{Component}. La classe \textit{ECS} contient aussi l'ensemble des systèmes.
     
     Quand un système, une entité ou un composant est ajouté(e) ou enlevé(e) l'ECS, la liste des entités concernées par chaque système est mise à jour.
     Une fonction permet d'appliquer le traitement de chaque système aux entités concernées. Voici un exemple-jouet d'utilisation de notre système ECS pour faire rebondir des objets sur le sol.
 
-    TODO EXEMPLE DE CODE
-    
+\begin{minted}[frame=single,framesep=4pt,breaklines]
+{typescript}
+// Vélocité et position mis en un seul composant pour l'exemple
+
+class C_VelocityPosition extends Component {
+    position: Vector3 = Vector3(0, 0, 0);
+    velocity: Vector3 = Vector3(0, 0, 0);
+}
+
+class S_Physics extends System {
+    override componentsRequired = new Set<Function>([C_VelocityPosition]);
+
+    override onUpdate(entities: Set<Entity>, timeSinceLastUpdate: number): void {
+        for (let entity of entities){
+            let comps = this.ecs.getComponents(entity);
+            let velPos = comps.get(C_Velocity);
+
+            velPos.velocity.add(Vector3(0, -1, 0)); // gravité
+
+            velPos.position.add( // intégration physique
+                velPos.velocity.clone().multiplyScalar(deltaTime * this.physicsSpeed)
+            );
+
+            // on admet que le sol est un plan en y = -1 et
+            // que les entités ont une forme de collision sphérique de rayon 1
+            if (velPos.position.y <= -1.0 + 1){
+                velPos.position.y = -1.0 + 1;
+                velPos.velocity.y = -velPos.velocity.y; // on fait rebondir la balle.
+        }
+    }
+}
+\end{minted}
+
+
     Nous définissons une liste de composants et systèmes "\textit{Core}" : des éléments généraux et fondamentaux au jeu. Comme notre moteur est très lié à notre jeu, cette frontière n'est pas toujours claire, par exemple, le code de synchronisation avec le serveur et le code d’interaction joueur-monde sont tous deux définis dans le jeu. Ils seront explicités dans la partie suivante qui portera sur le jeu en lui même.
-\paragraph{Components (\textit{Core})}
-    TODO
+
+    
+\subsubsection{Components (\textit{Core})}
+    Certains composants sont définis au niveau du moteur, d'autres, plus spécifiques à notre jeu, le sont au niveau du code de jeu. Ces derniers seront abordés plus tard. Voici la liste des composants "Core", ceux du moteur :
+    \begin{itemize}
+        \item \textbf{C\_Transform} représente la position, la rotation et la taille d'une entité
+        \item \textbf{C\_Mesh} représente un maillage 3D, avec potentiellement un \textit{material}
+        \footnote{Un \textit{material} est un objet contenant toutes les informations décrivant une surface spécifique pour le calcul des lumières. C'est les matériaux qui donnent leur apparence aux différents objets 3D.}
+        \item \textbf{C\_InteractionSphere} Une sphère utilisée pour les détections d'interactions avec le monde (voir la partie sur l'interaction)
+        \item \textbf{C\_Velocity} représente la vélocité d'une entité. Utilisée pour les calculs physiques
+        \item \textbf{C\_PhysicsObject} marque un objet pour le système de simulation physique
+        \item \textbf{C\_None} S'utilise pour signifier qu'un système n'agit sur aucune entité
+    \end{itemize}
 
 
-\paragraph{Systems (\textit{Core})}
-    TODO
+
+\subsubsection{Systems (\textit{Core})}
+    A l'instar des composants, plusieurs systèmes sont définis dans le moteur :
+    
+    \begin{itemize}
+        \item \textbf{S\_Draw}
+        
+            Composants nécessaires : \{C\_Mesh, C\_Transform \}
+            Ce système s'occupe du rendu visuel des différents objets de la scène 3D
+        \item \textbf{S\_Physics}
+        
+            Composants nécessaires : \{C\_Velocity, C\_Transform, C\_PhysicsBody \}
+            
+            Ce système effectue une simulation physique très simple sur les entités qu'il traite. Il est fait pour servir à faire des effets visuels sympathiques plutôt que des simulations réalistes. On peut simuler quelques milliers d'objets avec une fréquence d'image satisfaisante
+        \item \textbf{S\_Replication} 
+        
+            Composants nécessaires : \{C\_None\}
+            
+            Ce système s'occupe de la synchronisation entre le serveur et le client. Nous en parlerons d'avantage dans la partie sur l'architecture du jeu en lui même.
+    \end{itemize}
 
 
+\subsubsection{Input}
+    Dans une application interactive, il est particulièrement fondamental de pouvoir interagir avec l'application  (!)
 
+    Il y a trois contextes différents dans lesquels on veut récupérer les touches du clavier ou les boutons de la souris :
+    \begin{enumerate}
+        \item A intervalle régulier (à chaque passage de la boucle d'\textit{update}, par exemple), on vérifie qu'une touche particulière est pressée. C'est comme ça, qu'on détecte les déplacements du personnage tant qu'une touche est pressée
 
-\paragraph{Input}
-    TODO
+        \item De manière évènementielle, pour exécuter du code à chaque fois qu'une touche est pressée. C'est utile lorsque le joueur doit faire une action ponctuelle, par exemple, interagir avec les bâtiments de son village.
+
+        \item En tant que modificateur d'autres touches, pour les touches de combinaison telles que les touches \textit{control}, \textit{alt} et \textit{shift}.
+    \end{enumerate}
+
+    Javascript ne permet que de récupérer les entrées de manière évènementielles grâce à des fonctions de callback. Il nous a donc fallu créer notre propre système pour détecter et garder en mémoire les entrées utilisateur.
+    
+    Dans cette optique, nous avons créé une classe statique \textbf{Input}, fonctionnant en tant que \textit{singleton}. N'importe qui peut interroger le singleton pour quérir des informations sur une entrée en particulier, ou bien enregistrer une fonction de callback par le biais d'un \textit{subscriber pattern}.
+
+    Trois classes composent le système de gestion des entrées utilisateurs :
+
+    \begin{itemize}
+        \item \textbf{Keybind} représente une touche ou combinaison de touches, sur le clavier ou la souris.
+        \item \textbf{Input} est la classe statique principale. Elle contient toutes les fonctions permettant d'interagir avec le système d'entrées utilisateurs. On peut y enregistrer des actions (un couple nom-Keybind), y abonner des fonctions de callback, ou bien quérir l'état d'une touche, y compris la position de la souris à l'écran.
+        \item \textbf{InputEvent} représente un évènement d'appuie de touche ou de clic. Ce sont eux qui sont envoyés en arguments des fonctions de callback. Seules les actions enregistrées par l'utilisateur envoie des évènements.
+    \end{itemize}
     
 
+    Comme souvent dans le développement de moteurs, l'un des objectifs principaux est de fournir du code clair et facilement utilisable par les développeurs du jeu en lui même. Pour démontrer cet aspect, voici un exemple-jouet de l'utilisation de notre système d'entrées utilisateur :
 
-\paragraph{Game (Classe)}
-    TODO
+
+\begin{minted}[frame=single,framesep=4pt,breaklines]
+{typescript}
+function inputCallback(e: InputEvent) {
+    if (e.name == "jump")
+        console.log("Le personnage saute !");
+}
+
+Input.subscribe(inputCallback); // on abonne notre callback au système
+
+// on crée un nouveau keybind.
+// C'est là qu'on peut désigner des modificateurs (shift, ctrl, ...)
+Input.add_keybind("jump",
+    new Keybind("ArrowUp")
+)
+
+Input.add_keybind("go_left",
+    new Keybind("ArrowLeft", false, true) // ctrl = false, shift = true
+)
+
+function uneFonctionQuiTourneAChaqueUpdate(){
+    // demander directement l'état d'une touche
+    if (Input.is_action_pressed("go_left"))
+            console.log("Le personnage marche vers la gauche !");
+}
+\end{minted}
+
+
+\subsubsection{User Interface}
+    Tout le long du jeu, le joueur est amené à interagir avec diverses interfaces utilisateur. Que ce soit pour obtenir de simples informations comme les statistiques du joueur ou bien des données plus globales sur le royaume. 
+    
+    Certaines interfaces sont de manière permanente à l'écran (ressources de base, information joueur, ...) qu'il peut vouloir afficher ou non en fonction des situations, alors que d'autres permettent d'agir réellement sur le jeu, comme le choix d'un bâtiment à placer pour le rôle seigneur.
+    
+    Puisque nous faisons un jeu par navigateur, nous avons assez naturellement choisi d'implémenter ces interfaces en HTML, cependant, avec les diverses ouvertures, fermetures ou altérations dans l'affichage de ces interfaces, il nous fallait un moyen de les modifier dynamiquement à partir du typescript, de manière déclarative.
+    Après une recherches poussée, nous n'avons pas trouvé de bibliothèque d'interfaces déjà existant vraiment adapté à ce que nous voulions. Les solutions existantes étaient soient trop coûteuses en performances (plusieurs secondes de plus pour charger la page), pas assez customisables (par exemple, l'interface des démos de ThreeJS, qui est faite pour des menus rapides pour les développeurs plutôt que pour une interface utilisateur) ou bien nécessitaient un framework additionnel, tel qu'\textit{Angular} ou \textit{ReactJS}.
+    
+    Nous avons donc décidé de créer notre propre solution d'interface en type script, pour pouvoir en ajouter de nouvelles ou les modifier plus facilement.
+
+    Nous avons donc implémenté une classe pour chacun des éléments HTML qu'on utilise dans nos interfaces, tous héritant d'une classe plus globale \textbf{UI}.Ainsi, nous pouvons conserver la philosophie de hiérarchie des données de HTML. Chaque \textbf{UI} possède une liste d'enfants héritant de UI, qui seront aussi ses enfants dans la hiérarchie HTML. Ce polymorphisme permet de définir facilement des interfaces dans d'autres interfaces, nous offrant une modularité permettant, par exemple, de réutiliser des bouts d'interfaces à divers endroits.
+    
+    Les objets \textbf{UI} gardent en mémoire les informations de l'élément qu'ils représentent, comme sa position, son texte pour les éléments de texte, ou sa fonction de callback pour les boutons. Mais les éléments ne sont ajoutés à l'HTML qu'à l'appel de la fonction d'affichage, qui se répercute récursivement pour construire dans le DOM \footnote{
+    \textit{Document Object Model}, la version machine de l'arborescence décrite par un fichier HTML
+    } 
+    l'arborescence définie de manière déclarative en typescript.
+    De plus, pour nous permettre de customiser le style des éléments d'interface chaque objet \textbf{UI} référence une classe CSS. Ainsi, il nous suffit de définir au préalable quelques classes de styles dans un fichier CSS, par exemple pour les différentes couleurs de texte.
+
+    Certaines informations, comme la position des éléments, et leur mode de positionnement (absolu,relatif par rapport à leur parent, etc) doivent être passées dynamiquement du typescript au CSS. Pour cela, on utilise des variables CSS, une fonctionnalité spéciale permettant de modifier dynamiquement les attributs d'une feuille de style.
+    
+    Finalement, il n'y a plus qu'à construire notre interface, puis lier nos boutons aux fonctions de callback associées, qui vont généralement ouvrir ou fermer des sous-interfaces, et lier nos textes aux données récupérées du serveur.
+
+
+
+\subsubsection{Game (Classe)}
+    La classe \textbf{Game} permet de représenter le jeu en lui même. C'est elle qui contient l'objet ECS, ainsi que la scène ThreeJS : une arborescence propre à ThreeJS lui permettant de gérer l'affichage des objets 3D. Le jeu contient aussi une référence à la caméra ThreeJS active, en d'autre terme, de quel endroit, dans quelle direction et avec quel champ de vision est rendue la scène. C'est donc la classe \textbf{Game} qui s'occupe de l'abstraction entre l'ECS et le système de rendu de ThreeJS.
+
+    En outre, c'est ici qu'est créée la boucle de rafraîchissement. C'est elle qui va mettre en mouvement tout le reste du jeu : mettre à jour les systèmes, synchroniser les données, effectuer le rendu graphique du jeu, etc.
+
+    Une autre problématique importante dans les jeux est la transmission efficace des données et des évènements entre les différentes parties du jeu. Un jeu vidéo possède énormément de parties distinctes qui doivent communiquer. Souvent, un système de signaux est implémenté dans les moteurs pour assurer cette communication : On connecte un évènement d'une entité à une fonction sur cette entité ou autre part. Par exemple, si une plaque de pression au sol est activée, on active le piège.
+
+    Dans notre cas, nous avons choisi une approche plus rudimentaire mais tout aussi efficace à notre échelle : Un singleton \textbf{GameData} contient les informations de manière globale. Chaque partie du jeu peut venir en modifier ou en lire les attributs. On perd l'assurance de la sécurité ("tout le monde peut tout modifier"). Cela a causé plusieurs discussions et débats, cependant, cette solution s'est avérée la plus pratique. La définition de la classe \textbf{GameData} sert en quelque sorte de manifeste des données globales à l'échelle du projet, et il est facile avec les outils de développements modernes de tracer ce qui modifie ou lit un champ spécifique du singleton.
+    Les informations comme le mode de caméra (centré sur le personnage ou centré sur la carte) ou bien le rayon de la caméra au curseur de la souris (servant à cliquer dans la scène 3D) sont conservées dans le \textbf{GameData}.
+
+
+
+
+    
