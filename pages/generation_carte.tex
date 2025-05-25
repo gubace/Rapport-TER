@@ -1,7 +1,7 @@
 
 
 \subsection{Génération de la carte}
-    Pour ce projet nous voulions créer un outil pour créer une carte procéduralement. Pour cela nous avons écrit un programme en C++ qui crée un fichier .OBJ a partir de cartes de bruits.
+    Pour ce projet nous voulions créer un outil pour créer une carte procéduralement. Pour cela nous avons écrit un programme en C++ qui crée un fichier .OBJ \cite{obj} a partir de cartes de bruits.
     \paragraph{Cartes de bruits}
     Une carte de bruit, ou "noisemap", dans le contexte de la génération procédurale, est une technique utilisée pour créer des textures, des terrains ou des environnements de manière algorithmique. Les noisemaps dans la génération procédurale sont utilisées pour introduire des variations naturelles et réalistes dans les modèles générés par ordinateur.\cite{CreateTerrain}
     
@@ -14,7 +14,7 @@
             \label{fig:enter-label}
     \end{figure}
 
-    Nous pouvons manipuler l'aléatoire des fonctions qui génèrent ce genre de carte grâce a différents paramètres:
+    Nous pouvons manipuler l'aléatoire des fonctions qui génèrent ce genre de carte grâce à différents paramètres:
     \begin{itemize}
         \item La fréquence dans le contexte des fonctions de bruit, comme le bruit de Perlin, détermine la granularité ou la finesse des détails dans la carte de bruit générée. Une fréquence élevée signifie que les variations de bruit se produisent plus rapidement, ce qui entraîne des détails plus fins et plus nombreux dans la carte. À l'inverse, une fréquence basse produit des variations plus lentes et plus douces, résultant en des caractéristiques plus larges et moins détaillées.
         \item Les octaves sont utilisées pour ajouter de la complexité et du réalisme aux cartes de bruit. Chaque octave est une couche supplémentaire de bruit générée à une fréquence différente. En superposant plusieurs octaves, on peut créer des textures plus riches et plus variées. Les octaves sont généralement ajoutées avec des fréquences de plus en plus élevées et des amplitudes de plus en plus faibles.
